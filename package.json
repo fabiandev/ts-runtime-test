@@ -29,6 +29,8 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "babel-jest": "^20.0.3",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "pretty-sort": "https://github.com/jiayihu/pretty-algorithms.git#9f521c932d9e46d308ad99b420f8653d4d26bab4"
   }
 }
