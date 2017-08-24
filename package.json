@@ -9,28 +9,26 @@
     "node": ">=6"
   },
   "scripts": {
-    "test-pkg": "npm run reset && npm run build:temp && npm run test:temp",
-    "test-tsr": "npm run reset && npm run build:temp && npm run build:temp:tsr && npm run test:temp:tsr",
-    "test-fix": "npm run test-tsr-fix",
-    "test-tsr-fix": "npm run reset && npm run build:temp && npm run fix:code && npm run build:temp:tsr && npm run test:temp:tsr",
-    "rollback": "npm run prepare",
     "prepare": "npm run build && npm run setup",
-    "build": "npm run copy:temp && npm run fix:tsconfig && cd temp && yarn && yarn add ts-runtime --dev && cd ..",
-    "setup": "mkdir temp/algorithms-e && npm run fix:code:init && npm run build:temp",
+    "test": "cd temp && node_modules/.bin/jest -u --config ../jest.json && cd .",
+    "test-pkg": "npm run test:pkg && npm test",
+    "test-tsr": "npm run test:tsr && npm test",
+    "test-fix": "npm run test:fix && npm test",
+    "build": "npm run copy:pkg && npm run fix:tsconfig && cd temp && yarn && yarn add ts-runtime --dev && cd ..",
+    "setup": "mkdir temp/algorithms-e && npm run fix:code:init && npm run build:pkg",
     "reset": "cp -a temp/algorithms-e/. temp/algorithms && rm -r temp/lib && mkdir temp/lib",
+    "test:pkg": "npm run reset && npm run build:pkg",
+    "test:tsr": "npm run reset && npm run build:pkg && npm run build:tsr",
+    "test:fix": "npm run reset && npm run build:pkg && npm run fix:code && npm run build:tsr",
     "fix:tsconfig": "cp temp/tsconfig.json temp/tsconfig.json-e && cp fix/tsconfig.json temp/tsconfig.json",
     "fix:code:init": "cp -a temp/algorithms/. temp/algorithms-e",
     "fix:code": "cp -a fix/algorithms/. temp/algorithms",
-    "copy:temp": "rm -r temp && mkdir temp && cp -a node_modules/pretty-sort/. temp",
-    "build:temp": "cd temp && node_modules/.bin/tsc && cd ..",
-    "build:temp:tsr": "cd temp && node_modules/.bin/tsr $(find algorithms -name '*.ts' -not -name '*spec.ts' | tr '\n' ' ' | xargs)  -fec tsconfig.json && cd ..",
-    "test:temp": "cd temp && node_modules/.bin/jest -u --config ../jest.json && cd ..",
-    "test:temp:tsr": "cd temp && node_modules/.bin/jest -u --config ../jest.json && cd .."
+    "copy:pkg": "rm -r temp && mkdir temp && cp -a node_modules/pretty-sort/. temp",
+    "build:pkg": "cd temp && node_modules/.bin/tsc && cd ..",
+    "build:tsr": "cd temp && node_modules/.bin/tsr $(find algorithms -name '*.ts' -not -name '*spec.ts' | tr '\n' ' ' | xargs)  -fec tsconfig.json && cd .."
   },
   "dependencies": {},
   "devDependencies": {
-    "babel-jest": "^20.0.3",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "pretty-sort": "https://github.com/jiayihu/pretty-algorithms.git#9f521c932d9e46d308ad99b420f8653d4d26bab4"
   }
 }
