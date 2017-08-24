@@ -1,6 +1,6 @@
 {
   "name": "ts-runtime-test",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Test pretty-algorithms with ts-runtime",
   "repository": "https://github.com/fabiandev/ts-runtime-performance.git",
   "author": "Fabian Pirklbauer <hi@fabiandev.io>",
@@ -12,7 +12,6 @@
     "test-pkg": "npm run reset && npm run build:temp && npm run test:temp",
     "test-tsr": "npm run reset && npm run build:temp:tsr && npm run test:temp:tsr",
     "test-tsr-fix": "npm run fix:code && npm run build:temp:tsr && npm run test:temp:tsr",
-
     "prepare": "npm run build && npm run setup",
     "build": "npm run copy:temp && npm run fix:tsconfig && cd temp && yarn && yarn add ts-runtime --dev && cd ..",
     "setup": "mkdir temp/algorithms-e && npm run fix:code:init && npm run build:temp",
