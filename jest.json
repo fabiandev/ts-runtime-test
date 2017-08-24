@@ -1,0 +1,18 @@
+{
+  "transform": {
+    "^.+\\.jsx?$": "babel-jest"
+  },
+  "globals": {
+    "NODE_ENV": "test"
+  },
+  "testRegex": "lib/.*/.*\\.spec\\.js$",
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js"
+  ],
+  "snapshotSerializers": [
+    "./tests/btree-serializer.js",
+    "./tests/matrix-serializer.js"
+  ]
+}
