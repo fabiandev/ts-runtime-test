@@ -7,8 +7,6 @@
   },
   "testRegex": "lib/.*/.*\\.spec\\.js$",
   "moduleFileExtensions": [
-    "ts",
-    "tsx",
     "js"
   ],
   "snapshotSerializers": [
