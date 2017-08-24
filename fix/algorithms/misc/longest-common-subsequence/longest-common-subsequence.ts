@@ -23,7 +23,7 @@ export function lcsLengths(seqA: string, seqB: string): number[][] {
   const lengthB = seqB.length;
 
   const lengths: number[][] = new Array(lengthA + 1);
-  fill(lengths, (index: number /* parameter signature was missing */ ) => new Array(lengthB + 1));
+  fill(lengths, (index: number /* ts-runtime: missing parameter signature */ ) => new Array(lengthB + 1));
 
   range(0, lengthA).forEach(i => (lengths[i][0] = 0));
   range(0, lengthB).forEach(i => (lengths[0][i] = 0));

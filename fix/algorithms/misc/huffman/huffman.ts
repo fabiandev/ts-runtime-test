@@ -2,7 +2,7 @@ const MinHeap = require('min-heap');
 import { range } from '../../utils';
 
 export interface Frequency {
-  char: string;
+  char?: string; // ts-runtime: property must exist or be optional
   frequency: number;
 }
 
@@ -27,12 +27,10 @@ export function huffman(frequences: Frequency[]) {
   range(0, frequences.length - 2).forEach(() => {
     const tempLeft = queue.removeHead();
     const tempRight = queue.removeHead();
-    tempLeft.char = void 0; // fixes error
-    tempLeft.left = void 0; // fixes error
-    tempLeft.right = void 0; // fixes error
-    tempRight.char = void 0; // fixes error
-    tempRight.left = void 0; // fixes error
-    tempRight.right = void 0; // fixes error
+    tempLeft.left = void 0; // ts-runtime: property must exist
+    tempLeft.right = void 0; // ts-runtime: property must exist
+    tempRight.left = void 0; // ts-runtime: property must exist
+    tempRight.right = void 0; // ts-runtime: property must exist
     const left: Frequency = tempLeft;
     const right: Frequency = tempRight;
     const merged = {
