@@ -17,7 +17,7 @@ To set the environment to test in, the following commands can be used:
 
 | Environment            | Command            |
 | ---------------------- | ------------------ |
-| Original Build         | `npm run test:pkg` |
+| Standard Build         | `npm run test:pkg` |
 | ts-runtime Build       | `npm run test:tsr` |
 | Fixed ts-runtime Build | `npm run test:fix` |
 
