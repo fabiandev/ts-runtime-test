@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf8">
+  <title>ts-runtime Benchmarks</title>
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="assets/astrobench.css">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+  <div id="loading"></div>
+  <div id="astrobench"></div>
+  
+  <script src="assets/debounce.js"></script>
+  <script src="assets/loading.js"></script>
+  <script src="assets/astrobench.js"></script>
+  <script src="assets/require.js"></script>
+  
+  <script>
+    requirejs.config({
+      'packages': [{
+          'name': 'lodash',
+          'location': 'https://unpkg.com/lodash-amd@^4.17.4/'
+        }, {
+          'name': 'min-heap',
+          'main': 'min-heap.js',
+          'location': './assets'
+        }, {
+          'name': 'ts-runtime/lib',
+          'main': 'ts-runtime.lib.js',
+          'location': 'https://unpkg.com/ts-runtime@^0.1.33/lib/'
+        }],
+        onNodeCreated: function(node, config, moduleName, url) {
+          loading.show();
+          
+          node.addEventListener('load', function loadListener() {
+            loading.hide();
+            node.removeEventListener('load', loadListener);
+          });
+
+          node.addEventListener('error', function errorListener() {
+            loading.hide();
+            node.removeEventListener('error', errorListener);
+          });
+        },
+    });
+  </script>
+  
+  <script src="assets/bundle-pkg.amd.js"></script>
+  <script src="assets/bundle-tsr.amd.js"></script>
+  
+  <script src="test/misc/activity-selection/activitySelector.suite.js"></script>
+  <script src="test/misc/huffman/huffman.suite.js"></script>
+  <script src="test/misc/inversions-count/countInversions.suite.js"></script>
+  <script src="test/misc/longest-common-subsequence/findLCS.suite.js"></script>
+  <script src="test/misc/longest-common-subsequence/lcsLength.suite.js"></script>
+  <script src="test/misc/maximum-subarray/maxCrossSubarray.suite.js"></script>
+  <script src="test/misc/maximum-subarray/maxSubarray.suite.js"></script>
+  <script src="test/misc/priority-queue/extractMax.suite.js"></script>
+  <script src="test/misc/priority-queue/increasePriority.suite.js"></script>
+  <script src="test/misc/priority-queue/insert.suite.js"></script>
+  <script src="test/misc/rod-cutting/bottomUpCutRod.suite.js"></script>
+  <script src="test/misc/rod-cutting/cutRod.suite.js"></script>
+  <script src="test/misc/rod-cutting/topDownCutRod.suite.js"></script>
+  <script src="test/search/binary-search/binarySearch.suite.js"></script>
+  <script src="test/search/binary-search-tree/insert.suite.js"></script>
+  <script src="test/search/binary-search-tree/maximum.suite.js"></script>
+  <script src="test/search/binary-search-tree/minimum.suite.js"></script>
+  <script src="test/search/binary-search-tree/predecessor.suite.js"></script>
+  <script src="test/search/binary-search-tree/remove.suite.js"></script>
+  <script src="test/search/binary-search-tree/search.suite.js"></script>
+  <script src="test/search/binary-search-tree/successor.suite.js"></script>
+  <script src="test/search/binary-search-tree/transplant.suite.js"></script>
+  <script src="test/sort/counting-sort/countingSort.suite.js"></script>
+  <script src="test/sort/heap-sort/left.suite.js"></script>
+  <script src="test/sort/heap-sort/right.suite.js"></script>
+  <script src="test/sort/heap-sort/maxHeapify.suite.js"></script>
+  <script src="test/sort/heap-sort/buildMaxHeap.suite.js"></script>
+  <script src="test/sort/heap-sort/heapSort.suite.js"></script>
+  <script src="test/sort/insertion-sort/insertionSort.suite.js"></script>
+  <script src="test/sort/merge-and-insertion-sort/mergeAndInsertionSort.suite.js"></script>
+  <script src="test/sort/merge-sort/merge.suite.js"></script>
+  <script src="test/sort/merge-sort/mergeSort.suite.js"></script>
+  <script src="test/sort/quick-sort/partition.suite.js"></script>
+  <script src="test/sort/quick-sort/quickSort.suite.js"></script>
+  <script src="test/sort/selection-sort/selectionSort.suite.js"></script>
+</body>
+
+</html>
