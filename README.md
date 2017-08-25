@@ -2,11 +2,11 @@
 
 This package uses [pretty-algorithms](https://github.com/jiayihu/pretty-algorithms) and runs its tests with a standard build and a [ts-runtime](https://github.com/fabiandev/ts-runtime) build.
 
-## Usage
+# Usage
 
-With just a few commands, it is possible to compare the test results from the different builds. Each time a test script is executed, a fresh build is created.
+With just a few commands, it is possible to compare the test results from the different builds.
 
-### Install
+## Install
 
 By installing the dependencies of this package, all preparation work is also carried out:
 
@@ -14,32 +14,32 @@ By installing the dependencies of this package, all preparation work is also car
 $ npm install
 ```
 
-### Test
+## Test
 
-Build the package as-is and run the tests:
+The test results of the original code base, a build with ts-runtime, as well as a fixed ts-runtime build can be compared.
 
-```sh
-npm run test-pkg
-```
+### Unit Tests
 
-Build the package with ts-runtime and run the tests:
+To set the environment to test in, the following commands can be used:
 
-```sh
-npm run test-tsr
-```
+| Environment            | Command            |
+| ---------------------- | ------------------ |
+| Original Build         | `npm run test:pkg` |
+| ts-runtime Build       | `npm run test:tsr` |
+| Fixed ts-runtime Build | `npm run test:fix` |
 
-> Some runtime exceptions will be thrown by ts-runtime
+After that the tests can be executed as often as desired with `npm test`.
+To get a fresh build, the testing environment can be set again.
 
-Fix errors, before building and testing with ts-runtime again:
+> To build and test in a single step the command `npm run test-<env>` can be used,
+> with `<env>` set to `pkg`, `tsr` or `fix`. 
 
-```sh
-npm run test-fix
-```
+### Performance Tests
 
-To run tests again, without a rebuild, the following command can be used:
+To run the benchmark tests locally, execute `npm run benchmark`,
+to start a development server with the interface,
+or visit https://fabiandev.github.io/ts-runtime-test/.
 
-```sh
-npm test
-```
+Benchmarks are captured with [benchmark.js](https://github.com/bestiejs/benchmark.js),
+while using [astrobench](https://github.com/kupriyanenko/astrobench) for the UI.
 
-To switch a testing environment without triggering the tests, use `npm run test:pkg`, `npm run test:tsr` or `npm run test:fix`. After that `npm test` can be used to run the test suites.
