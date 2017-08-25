@@ -13,46 +13,53 @@
   <div id="loading">
     <span id="loading-text">Loading Dependencies...</span>
   </div>
+  <div id="header">
+    <div id="github">
+      <a href="https://github.com/fabiandev/ts-runtime-test" target="_blank" title="ts-runtime-test on GitHub">
+        ts-runtime-test on <img id="ghlogo" src="assets/ghlogo.png" alt="GitHub Logo" border="0">
+      </a>
+    </div>
+  </div>
   <div id="astrobench"></div>
-  
+
   <script src="assets/debounce.js"></script>
   <script src="assets/loading.js"></script>
   <script src="assets/astrobench.js"></script>
   <script src="assets/require.js"></script>
-  
+
   <script>
     requirejs.config({
       'packages': [{
-          'name': 'lodash',
-          'location': 'https://unpkg.com/lodash-amd@^4.17.4/'
-        }, {
-          'name': 'min-heap',
-          'main': 'min-heap.js',
-          'location': './assets'
-        }, {
-          'name': 'ts-runtime/lib',
-          'main': 'ts-runtime.lib.js',
-          'location': 'https://unpkg.com/ts-runtime@^0.1.33/lib/'
-        }],
-        onNodeCreated: function(node, config, moduleName, url) {
-          loading.show(url);
-          
-          node.addEventListener('load', function loadListener() {
-            loading.hide(url);
-            node.removeEventListener('load', loadListener);
-          });
+        'name': 'lodash',
+        'location': 'https://unpkg.com/lodash-amd@^4.17.4/'
+      }, {
+        'name': 'min-heap',
+        'main': 'min-heap.js',
+        'location': './assets'
+      }, {
+        'name': 'ts-runtime/lib',
+        'main': 'ts-runtime.lib.js',
+        'location': 'https://unpkg.com/ts-runtime@^0.1.33/lib/'
+      }],
+      onNodeCreated: function(node, config, moduleName, url) {
+        loading.show(url);
 
-          node.addEventListener('error', function errorListener() {
-            loading.hide(url);
-            node.removeEventListener('error', errorListener);
-          });
-        },
+        node.addEventListener('load', function loadListener() {
+          loading.hide(url);
+          node.removeEventListener('load', loadListener);
+        });
+
+        node.addEventListener('error', function errorListener() {
+          loading.hide(url);
+          node.removeEventListener('error', errorListener);
+        });
+      },
     });
   </script>
-  
+
   <script src="assets/bundle-pkg.amd.js"></script>
   <script src="assets/bundle-tsr.amd.js"></script>
-  
+
   <script src="test/misc/activity-selection/activitySelector.suite.js"></script>
   <script src="test/misc/huffman/huffman.suite.js"></script>
   <script src="test/misc/inversions-count/countInversions.suite.js"></script>
