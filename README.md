@@ -12,7 +12,8 @@ $ npm install
 
 # Unit Tests
 
-The test results of the original code base, a build with ts-runtime, as well as a fixed ts-runtime build can be compared. To set the environment to test in, the following commands can be used:
+The test results of the original code base, a build with ts-runtime, as well as a fixed ts-runtime build can be compared.  
+To set the environment to test in, the following commands can be used:
 
 | Environment            | Command            |
 | ---------------------- | ------------------ |
