@@ -24,7 +24,7 @@ To set the environment to test in, the following commands can be used:
 | ts-runtime Build       | `npm run test:tsr` |
 | Fixed ts-runtime Build | `npm run test:fix` |
 
-After that the tests can be executed as often as desired with `npm test`.
+After that, the tests can be executed as often as desired with `npm test`.
 To get a fresh build, the testing environment can be set again.
 
 > To build and test in a single step the command `npm run test-<env>` can be used,
