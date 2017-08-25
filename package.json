@@ -11,11 +11,12 @@
   "scripts": {
     "prepare": "npm run build && npm run setup",
     "test": "cd temp && node_modules/.bin/jest -u --config ../jest.json && cd .",
+    "benchmark": "node_modules/.bin/live-server ./docs",
     "test-pkg": "npm run test:pkg && npm test",
     "test-tsr": "npm run test:tsr && npm test",
     "test-fix": "npm run test:fix && npm test",
     "build": "npm run copy:pkg && npm run fix:tsconfig && cd temp && yarn && yarn add ts-runtime --dev && cd ..",
-    "setup": "mkdir temp/algorithms-e && npm run fix:code:init && npm run build:pkg",
+    "setup": "mkdir temp/lib && mkdir temp/bundles && mkdir temp/algorithms-e && npm run fix:code:init && npm run build:docs && npm run build:pkg",
     "reset": "cp -a temp/algorithms-e/. temp/algorithms && rm -r temp/lib && mkdir temp/lib",
     "test:pkg": "npm run reset && npm run build:pkg",
     "test:tsr": "npm run reset && npm run build:pkg && npm run build:tsr",
@@ -23,14 +24,26 @@
     "fix:tsconfig": "cp temp/tsconfig.json temp/tsconfig.json-e && cp fix/tsconfig.json temp/tsconfig.json",
     "fix:code:init": "cp -a temp/algorithms/. temp/algorithms-e",
     "fix:code": "cp -a fix/algorithms/. temp/algorithms",
+    "fix:docs": "sed -i -e 's%(Math\\.abs(bench\\.hz - hz) / hz \\* 100)%(Math\\.round( (Math\\.abs(bench\\.hz) / hz \\* 100) \\* 100 ) / 100)%g' docs/assets/astrobench.js && sed -i -e 's/% slower/%/g' docs/assets/astrobench.js",
     "copy:pkg": "rm -r temp && mkdir temp && cp -a node_modules/pretty-sort/. temp",
     "build:pkg": "cd temp && node_modules/.bin/tsc && cd ..",
-    "build:tsr": "cd temp && node_modules/.bin/tsr $(find algorithms -name '*.ts' -not -name '*spec.ts' | tr '\n' ' ' | xargs)  -fec tsconfig.json && cd .."
+    "build:tsr": "cd temp && node_modules/.bin/tsr $(find algorithms -name '*.ts' -not -name '*spec.ts' | tr '\n' ' ' | xargs)  -fec tsconfig.json && cd ..",
+    "build:docs": "npm run amd && cp node_modules/astrobench/dist/astrobench.js docs/assets/astrobench.js && cp node_modules/astrobench/src/style.css docs/assets/astrobench.css && cp node_modules/requirejs/require.js docs/assets/require.js && npm run bundle && cp temp/bundles/bundle-pkg.amd.js docs/assets/bundle-pkg.amd.js && cp temp/bundles/bundle-tsr.amd.js docs/assets/bundle-tsr.amd.js && npm run fix:docs && npm run reset",
+    "bundle": "npm run test:pkg && npm run bundle:pkg && npm run test:fix && npm run bundle:tsr",
+    "bundle:pkg": "node_modules/.bin/babel --no-babelrc temp/lib --out-file temp/bundles/bundle-pkg.amd.js --plugins=transform-es2015-modules-amd --source-root temp/lib --module-root pkg --module-ids --no-comments",
+    "bundle:tsr": "node_modules/.bin/babel --no-babelrc temp/lib --out-file temp/bundles/bundle-tsr.amd.js --plugins=transform-es2015-modules-amd --source-root temp/lib --module-root tsr --module-ids --no-comments",
+    "amd": "node_modules/.bin/babel --no-babelrc temp/node_modules/min-heap/index.js --out-file docs/assets/min-heap.js --plugins=transform-es2015-modules-amd --no-comments"
   },
   "dependencies": {},
   "devDependencies": {
+    "astrobench": "^0.1.2",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-jest": "^20.0.3",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "pretty-sort": "https://github.com/jiayihu/pretty-algorithms.git#9f521c932d9e46d308ad99b420f8653d4d26bab4"
+    "babel-plugin-transform-es2015-modules-amd": "^6.24.1",
+    "live-server": "^1.2.0",
+    "lodash-amd": "^4.17.4",
+    "pretty-sort": "https://github.com/jiayihu/pretty-algorithms.git#9f521c932d9e46d308ad99b420f8653d4d26bab4",
+    "requirejs": "^2.3.5"
   }
 }
