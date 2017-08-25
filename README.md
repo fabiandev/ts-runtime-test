@@ -2,11 +2,7 @@
 
 This package uses [pretty-algorithms](https://github.com/jiayihu/pretty-algorithms) and runs its tests with a standard build and a [ts-runtime](https://github.com/fabiandev/ts-runtime) build.
 
-# Usage
-
-With just a few commands, it is possible to compare the test results from the different builds.
-
-## Install
+# Install
 
 By installing the dependencies of this package, all preparation work is also carried out:
 
@@ -14,11 +10,11 @@ By installing the dependencies of this package, all preparation work is also car
 $ npm install
 ```
 
-## Test
+# Test
 
 The test results of the original code base, a build with ts-runtime, as well as a fixed ts-runtime build can be compared.
 
-### Unit Tests
+## Unit Tests
 
 To set the environment to test in, the following commands can be used:
 
@@ -34,7 +30,7 @@ To get a fresh build, the testing environment can be set again.
 > To build and test in a single step the command `npm run test-<env>` can be used,
 > with `<env>` set to `pkg`, `tsr` or `fix`. 
 
-### Performance Tests
+## Performance Tests
 
 To run the benchmark tests locally, execute `npm run benchmark`,
 to start a development server with the interface,
