@@ -10,7 +10,9 @@
 </head>
 
 <body>
-  <div id="loading"></div>
+  <div id="loading">
+    <span id="loading-text">Loading Dependencies...</span>
+  </div>
   <div id="astrobench"></div>
   
   <script src="assets/debounce.js"></script>
@@ -33,15 +35,15 @@
           'location': 'https://unpkg.com/ts-runtime@^0.1.33/lib/'
         }],
         onNodeCreated: function(node, config, moduleName, url) {
-          loading.show();
+          loading.show(url);
           
           node.addEventListener('load', function loadListener() {
-            loading.hide();
+            loading.hide(url);
             node.removeEventListener('load', loadListener);
           });
 
           node.addEventListener('error', function errorListener() {
-            loading.hide();
+            loading.hide(url);
             node.removeEventListener('error', errorListener);
           });
         },

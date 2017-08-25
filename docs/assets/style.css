@@ -5,4 +5,13 @@
   z-index: 1000;
   background-color: #000;
   opacity: 0.5;
+  text-align: center;
+  color: #dbdbdb;
+  font-size: 16px;
+  padding-top: 30px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+#loading #loading-text {
+  display: none;
 }
