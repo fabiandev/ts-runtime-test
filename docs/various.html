@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf8">
+  <title>ts-runtime Benchmarks</title>
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="assets/astrobench.css">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+  <div id="loading">
+    <span id="loading-text">Loading Dependencies...</span>
+  </div>
+  <div id="header">
+    <div id="github">
+      <a href="https://github.com/fabiandev/ts-runtime-test" target="_blank" title="ts-runtime-test on GitHub">
+        ts-runtime-test on <img id="ghlogo" src="assets/ghlogo.png" alt="GitHub Logo" border="0">
+      </a>
+    </div>
+  </div>
+  <div id="astrobench"></div>
+
+  <script src="assets/debounce.js"></script>
+  <script src="assets/loading.js"></script>
+  <script src="assets/astrobench.js"></script>
+  <script src="assets/require.js"></script>
+
+  <script>
+    requirejs.config({
+      'packages': [{
+        'name': 'lodash',
+        'location': 'https://unpkg.com/lodash-amd@^4.17.4/'
+      }, {
+        'name': 'min-heap',
+        'main': 'min-heap.js',
+        'location': './assets'
+      }, {
+        'name': 'ts-runtime/lib',
+        'main': 'ts-runtime.lib.js',
+        'location': 'https://unpkg.com/ts-runtime@^0.1.33/lib/'
+      }],
+      onNodeCreated: function(node, config, moduleName, url) {
+        loading.show(url);
+
+        node.addEventListener('load', function loadListener() {
+          loading.hide(url);
+          node.removeEventListener('load', loadListener);
+        });
+
+        node.addEventListener('error', function errorListener() {
+          loading.hide(url);
+          node.removeEventListener('error', errorListener);
+        });
+      },
+    });
+  </script>
+
+  <script src="test/various/primitive.suite.js"></script>
+  <script src="test/various/class.suite.js"></script>
+  <script src="test/various/interface.suite.js"></script>
+</body>
+
+</html>
