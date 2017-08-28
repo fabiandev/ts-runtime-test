@@ -1,6 +1,6 @@
 {
   "name": "ts-runtime-test",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Test pretty-algorithms with ts-runtime",
   "repository": "https://github.com/fabiandev/ts-runtime-performance.git",
   "author": "Fabian Pirklbauer <hi@fabiandev.io>",
